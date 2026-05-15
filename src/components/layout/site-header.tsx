@@ -22,9 +22,9 @@ export function SiteHeader() {
       <div className="flex h-14 items-center px-4 md:px-6">
         <div className="flex flex-1 items-center justify-end space-x-2 md:justify-end">
           <nav className="flex items-center gap-2">
-            <Button variant="default" size="sm" className="hidden sm:inline-flex">
+            <Link href="/pricing" className={cn(buttonVariants({ variant: "default", size: "sm" }), "hidden sm:inline-flex")}>
               Subscribe
-            </Button>
+            </Link>
             
             <Link href="/login" className={cn(buttonVariants({ variant: "outline", size: "sm" }))}>
               Login

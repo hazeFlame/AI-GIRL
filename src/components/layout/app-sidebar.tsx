@@ -1,9 +1,9 @@
 import Link from "next/link"
-import { MessageSquare, Compass } from "lucide-react"
+import { MessageSquare, Compass, CreditCard } from "lucide-react"
 
 export function AppSidebar() {
   return (
-    <aside className="w-64 border-r bg-background flex flex-col h-full">
+    <aside className="hidden md:flex w-64 border-r bg-background flex-col h-full shrink-0">
       <div className="h-14 flex items-center px-4 border-b">
         <Link href="/" className="font-bold text-xl tracking-tight text-primary">
           AI Girl
@@ -23,6 +23,13 @@ export function AppSidebar() {
         >
           <Compass className="w-4 h-4" />
           <span>Explore</span>
+        </Link>
+        <Link 
+          href="/pricing" 
+          className="flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-md hover:bg-accent hover:text-accent-foreground transition-colors"
+        >
+          <CreditCard className="w-4 h-4" />
+          <span>Pricing</span>
         </Link>
       </nav>
       <div className="p-4 border-t text-xs text-muted-foreground">

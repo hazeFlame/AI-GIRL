@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { Moon, Sun, Globe } from "lucide-react"
+import { Moon, Sun, Globe, Menu, MessageSquare, Compass, CreditCard } from "lucide-react"
 import { useTheme } from "next-themes"
 
 import { Button, buttonVariants } from "@/components/ui/button"
@@ -13,6 +13,13 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet"
 
 export function SiteHeader() {
   const { setTheme } = useTheme()
@@ -20,6 +27,47 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="flex h-14 items-center px-4 md:px-6">
+        <Sheet>
+          <SheetTrigger className={cn(buttonVariants({ variant: "ghost", size: "icon" }), "md:hidden mr-2")}>
+            <Menu className="h-5 w-5" />
+            <span className="sr-only">Toggle Menu</span>
+          </SheetTrigger>
+          <SheetContent side="left" className="w-64 p-0">
+            <SheetHeader className="p-4 border-b text-left">
+              <SheetTitle>
+                <Link href="/" className="font-bold text-xl tracking-tight text-primary">
+                  AI Girl
+                </Link>
+              </SheetTitle>
+            </SheetHeader>
+            <nav className="flex flex-col gap-2 p-4">
+              <Link 
+                href="/chat" 
+                className="flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-md hover:bg-accent hover:text-accent-foreground transition-colors"
+              >
+                <MessageSquare className="w-4 h-4" />
+                <span>Chat</span>
+              </Link>
+              <Link 
+                href="/explore" 
+                className="flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-md hover:bg-accent hover:text-accent-foreground transition-colors"
+              >
+                <Compass className="w-4 h-4" />
+                <span>Explore</span>
+              </Link>
+              <Link 
+                href="/pricing" 
+                className="flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-md hover:bg-accent hover:text-accent-foreground transition-colors"
+              >
+                <CreditCard className="w-4 h-4" />
+                <span>Pricing</span>
+              </Link>
+            </nav>
+          </SheetContent>
+        </Sheet>
+        <Link href="/" className="md:hidden font-bold text-lg tracking-tight text-primary mr-2">
+          AI Girl
+        </Link>
         <div className="flex flex-1 items-center justify-end space-x-2 md:justify-end">
           <nav className="flex items-center gap-2">
             <Link href="/pricing" className={cn(buttonVariants({ variant: "default", size: "sm" }), "hidden sm:inline-flex")}>

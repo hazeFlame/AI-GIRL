@@ -125,7 +125,7 @@ export function PricingSection() {
       <article className="text-center mb-16 max-w-3xl mx-auto space-y-4 relative z-10 px-4">
         <h2 className="text-4xl md:text-6xl font-medium text-foreground tracking-tight">
           <VerticalCutReveal>
-            Plans that work best for you
+            Find your perfect match
           </VerticalCutReveal>
         </h2>
 
@@ -135,8 +135,7 @@ export function PricingSection() {
           customVariants={revealVariants}
           className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto"
         >
-          Trusted by millions, we help teams all around the world. Explore which
-          option is right for you.
+          Experience deep emotional connections and meaningful conversations with an AI partner who truly understands you. Choose the plan that brings you closer.
         </TimelineContent>
 
         <TimelineContent as="div" animationNum={2} customVariants={revealVariants}>

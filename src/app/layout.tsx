@@ -40,9 +40,9 @@ export default function RootLayout({
 				>
 					<div className="flex h-screen overflow-hidden bg-background">
 						<AppSidebar />
-						<div className="flex-1 flex flex-col min-w-0 relative">
+						<div className="flex-1 flex flex-col min-w-0 relative overflow-y-auto">
 							<SiteHeader />
-							<main className="flex-1 overflow-auto">
+							<main className="flex-1 flex flex-col">
 								{children}
 							</main>
 							<SiteFooter />

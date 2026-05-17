@@ -1,10 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import { MessageSquare, Heart, Star, Sparkles, UserRound, ArrowUpRight } from "lucide-react";
-import { getCurrentUser } from "@/lib/auth-session";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CompanionCarousel } from "@/components/dashboard/companion-carousel";
+import { WelcomeBanner } from "@/components/dashboard/welcome-banner";
 
 const companions = [
 	{
@@ -89,25 +89,12 @@ const companions = [
 	},
 ];
 
-export default async function DashboardPage() {
-	let user = null;
-	try {
-		user = await getCurrentUser();
-	} catch (e) {
-		console.warn("Auth system failed to initialize locally (likely missing BETTER_AUTH_SECRET in .env):", e);
-	}
-	const firstName = user?.name?.split(" ")[0] || "旅行者";
-
+export default function DashboardPage() {
 	return (
 		<div className="flex-1 p-6 md:p-10 space-y-8 bg-background">
 			{/* Welcome Banner */}
 			<div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b pb-6">
-				<div>
-					<p className="text-sm text-muted-foreground">欢迎回来，我的伴侣</p>
-					<h1 className="mt-1 text-3xl font-semibold tracking-tight">
-						你好，{firstName} ✨
-					</h1>
-				</div>
+				<WelcomeBanner />
 				<Link href="/chat">
 					<Button className="bg-[#ff6f91] hover:bg-[#ff84a2] text-white gap-2">
 						<MessageSquare className="size-4" />

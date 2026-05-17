@@ -5,6 +5,8 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { requireSession } from "@/lib/auth-session";
 
+export const dynamic = "force-dynamic";
+
 function formatDate(value: Date | string | number | null | undefined) {
 	if (!value) {
 		return "Unknown";

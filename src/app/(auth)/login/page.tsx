@@ -2,6 +2,8 @@ import { LoginForm } from "@/components/auth/login-form"
 import { getSafeAuthRedirect } from "@/lib/auth-redirect"
 import { redirectIfAuthenticated } from "@/lib/auth-session"
 
+export const dynamic = "force-dynamic";
+
 type LoginPageProps = {
   searchParams: Promise<{
     callbackURL?: string | string[]

@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { requireUser } from "@/lib/auth-session";
 
+export const dynamic = "force-dynamic";
+
 export default async function ChatPage() {
 	const user = await requireUser();
 	const firstName = user.name?.split(" ")[0] || "there";

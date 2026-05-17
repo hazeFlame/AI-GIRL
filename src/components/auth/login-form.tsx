@@ -8,7 +8,11 @@ import { authClient } from "@/lib/auth-client";
 
 type AuthMode = "sign-in" | "sign-up";
 
-export function LoginForm() {
+type LoginFormProps = {
+	callbackURL?: string;
+};
+
+export function LoginForm({ callbackURL = "/" }: LoginFormProps) {
 	const [mode, setMode] = useState<AuthMode>("sign-in");
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
@@ -30,14 +34,14 @@ export function LoginForm() {
 				? await authClient.signIn.email({
 						email,
 						password,
-						callbackURL: "/",
+						callbackURL,
 						rememberMe: true,
 					})
 				: await authClient.signUp.email({
 						name: name || email.split("@")[0],
 						email,
 						password,
-						callbackURL: "/",
+						callbackURL,
 					});
 
 		if (response.error) {
@@ -46,7 +50,7 @@ export function LoginForm() {
 			return;
 		}
 
-		window.location.href = "/";
+		window.location.href = callbackURL;
 	};
 
 	const signInWithGoogle = async () => {
@@ -55,8 +59,8 @@ export function LoginForm() {
 
 		const { error } = await authClient.signIn.social({
 			provider: "google",
-			callbackURL: "/",
-			errorCallbackURL: "/login",
+			callbackURL,
+			errorCallbackURL: `/login?callbackURL=${encodeURIComponent(callbackURL)}`,
 		});
 
 		if (error) {

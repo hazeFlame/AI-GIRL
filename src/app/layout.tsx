@@ -17,8 +17,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-	title: "AI Girl - AI Companion",
-	description: "Your ultimate AI companion platform",
+	title: "AI Character",
+	description: "Your ultimate AI character platform",
 };
 
 export default function RootLayout({

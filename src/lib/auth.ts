@@ -23,10 +23,17 @@ function requireBinding(env: AuthBindings, name: keyof AuthBindings): string {
 	return value;
 }
 
+function optionalBinding(env: AuthBindings, name: keyof AuthBindings): string | null {
+	const value = env[name];
+	return typeof value === "string" && value.length > 0 ? value : null;
+}
+
 export function getAuth() {
 	const { env } = getCloudflareContext();
 	const bindings = env as AuthBindings;
 	const db = createDb(bindings.DB);
+	const googleClientId = optionalBinding(bindings, "GOOGLE_CLIENT_ID");
+	const googleClientSecret = optionalBinding(bindings, "GOOGLE_CLIENT_SECRET");
 
 	return betterAuth({
 		baseURL: requireBinding(bindings, "BETTER_AUTH_URL"),
@@ -35,11 +42,20 @@ export function getAuth() {
 			provider: "sqlite",
 			schema,
 		}),
-		socialProviders: {
-			google: {
-				clientId: requireBinding(bindings, "GOOGLE_CLIENT_ID"),
-				clientSecret: requireBinding(bindings, "GOOGLE_CLIENT_SECRET"),
-			},
+		emailAndPassword: {
+			enabled: true,
+			requireEmailVerification: false,
+			minPasswordLength: 8,
 		},
+		...(googleClientId && googleClientSecret
+			? {
+					socialProviders: {
+						google: {
+							clientId: googleClientId,
+							clientSecret: googleClientSecret,
+						},
+					},
+				}
+			: {}),
 	});
 }

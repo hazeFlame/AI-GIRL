@@ -9,7 +9,7 @@ function isProtectedPath(pathname: string) {
 	);
 }
 
-export function proxy(request: NextRequest) {
+export function middleware(request: NextRequest) {
 	const { pathname, search } = request.nextUrl;
 
 	if (isProtectedPath(pathname) && !getSessionCookie(request)) {

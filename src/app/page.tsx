@@ -111,21 +111,7 @@ export default function Home() {
 						</div>
 						<span className="font-bold text-lg text-white tracking-wider">AI Character</span>
 					</div>
-					<div className="flex items-center gap-4">
-						<Link href="/login" className="text-sm font-medium text-[#f5dce5]/80 hover:text-white transition-colors">
-							登录
-						</Link>
-						<Link
-							href="/dashboard"
-							className={cn(
-								buttonVariants({ size: "sm" }),
-								"bg-gradient-to-r from-[#ff6f91] to-[#ff84a2] hover:opacity-90 transition-opacity text-white border-0 shadow-lg shadow-[#ff6f91]/25"
-							)}
-						>
-							立即进入
-							<ChevronRight className="size-4 ml-0.5" />
-						</Link>
-					</div>
+
 				</div>
 			</header>
 

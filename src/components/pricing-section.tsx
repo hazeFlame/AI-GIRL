@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import NumberFlow from "@number-flow/react";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 
@@ -11,7 +11,13 @@ const TimelineContent = ({
   customVariants,
   animationNum,
   as = "div",
-}: any) => {
+}: {
+  children: React.ReactNode;
+  className?: string;
+  customVariants: Variants;
+  animationNum: number;
+  as?: "div" | "p";
+}) => {
   if (as === "p") {
     return (
       <motion.p
@@ -19,7 +25,7 @@ const TimelineContent = ({
         custom={animationNum}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: "-50px" as any }}
+        viewport={{ once: true, margin: "-50px" }}
         className={className}
       >
         {children}
@@ -32,7 +38,7 @@ const TimelineContent = ({
       custom={animationNum}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-50px" as any }}
+      viewport={{ once: true, margin: "-50px" }}
       className={className}
     >
       {children}
@@ -41,7 +47,13 @@ const TimelineContent = ({
 };
 
 // Mocking VerticalCutReveal as a simple stagger reveal
-const VerticalCutReveal = ({ children, className }: any) => {
+const VerticalCutReveal = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}

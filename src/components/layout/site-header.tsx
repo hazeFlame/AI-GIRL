@@ -5,7 +5,7 @@ import Link from "next/link"
 import { Moon, Sun, Globe, Menu, MessageSquare, Compass, CreditCard } from "lucide-react"
 import { useTheme } from "next-themes"
 
-import { Button, buttonVariants } from "@/components/ui/button"
+import { buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import {
   DropdownMenu,

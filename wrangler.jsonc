@@ -24,6 +24,14 @@
 		// see https://opennext.js.org/cloudflare/howtos/image
 		"binding": "IMAGES"
 	},
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "ai-girl",
+			"database_id": "4cf139d4-b925-430b-90e8-65d0a72711f3",
+			"migrations_dir": "drizzle"
+		}
+	],
 	"services": [
 		{
 			// Self-reference service binding, the service name must match the worker name

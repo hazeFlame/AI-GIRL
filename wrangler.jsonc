@@ -43,7 +43,7 @@
 	"observability": {
 		"enabled": true
 	},
-	"upload_source_maps": true
+	"upload_source_maps": true,
 	/**
 	 * Smart Placement
 	 * https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement
@@ -61,5 +61,8 @@
 	 * Note: Use secrets to store sensitive data.
 	 * https://developers.cloudflare.com/workers/configuration/secrets/
 	 */
-	// "vars": {  "MY_VARIABLE": "production_value" }
+	"vars": {
+		"BETTER_AUTH_URL": "https://girlove.live",
+		"GOOGLE_CLIENT_ID": "898564538681-55335l7i8hulclctoqqholjeb3d9mt3o.apps.googleusercontent.com",
+	}
 }

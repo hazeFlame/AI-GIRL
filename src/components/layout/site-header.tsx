@@ -2,15 +2,19 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { Moon, Sun, Globe, Menu, MessageSquare, Compass, CreditCard } from "lucide-react"
+import { Compass, CreditCard, Globe, LogOut, Menu, MessageSquare, Moon, Sun, User } from "lucide-react"
 import { useTheme } from "next-themes"
 
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import { authClient } from "@/lib/auth-client"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import {
@@ -23,6 +27,23 @@ import {
 
 export function SiteHeader() {
   const { setTheme } = useTheme()
+  const { data: session, isPending } = authClient.useSession()
+  const [isSigningOut, setIsSigningOut] = React.useState(false)
+  const user = session?.user
+  const userName = user?.name || user?.email || "Account"
+  const userInitial = userName.charAt(0).toUpperCase()
+
+  const signOut = async () => {
+    setIsSigningOut(true)
+    const response = await authClient.signOut()
+
+    if (response.error) {
+      setIsSigningOut(false)
+      return
+    }
+
+    window.location.href = "/"
+  }
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -73,10 +94,38 @@ export function SiteHeader() {
             <Link href="/pricing" className={cn(buttonVariants({ variant: "default", size: "sm" }), "hidden sm:inline-flex")}>
               Subscribe
             </Link>
-            
-            <Link href="/login" className={cn(buttonVariants({ variant: "outline", size: "sm" }))}>
-              Login
-            </Link>
+
+            {isPending ? (
+              <span className="h-7 w-16 rounded-lg border bg-muted" />
+            ) : user ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger className={cn(buttonVariants({ variant: "outline", size: "sm" }), "gap-2 pl-1.5")}>
+                  <Avatar size="sm">
+                    <AvatarImage alt={userName} src={user.image || undefined} />
+                    <AvatarFallback>{userInitial}</AvatarFallback>
+                  </Avatar>
+                  <span className="hidden max-w-28 truncate sm:inline">{user.name || user.email}</span>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56">
+                  <DropdownMenuLabel className="space-y-1">
+                    <p className="truncate text-sm font-medium text-foreground">{user.name || "Signed in"}</p>
+                    {user.email ? (
+                      <p className="truncate text-xs font-normal text-muted-foreground">{user.email}</p>
+                    ) : null}
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem disabled={isSigningOut} onClick={signOut}>
+                    <LogOut className="size-4" />
+                    {isSigningOut ? "Signing out..." : "Sign out"}
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Link href="/login" className={cn(buttonVariants({ variant: "outline", size: "sm" }))}>
+                <User className="size-4" />
+                Login
+              </Link>
+            )}
 
             <DropdownMenu>
               <DropdownMenuTrigger className={cn(buttonVariants({ variant: "ghost", size: "icon" }), "h-9 w-9")}>

@@ -2,17 +2,27 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import {
+	Award,
+	Bell,
+	ChevronDown,
+	ChevronRight,
 	CreditCard,
+	Gift,
+	Headphones,
+	Languages,
 	LogOut,
 	MessageCircle,
 	Moon,
-	Plus,
+	PenLine,
 	Search,
 	Sparkles,
 	Sun,
 	UserRound,
+	Wallet,
+	X,
+	type LucideIcon,
 } from "lucide-react";
 import { useTheme } from "next-themes";
 
@@ -22,16 +32,20 @@ import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
-	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+	Sheet,
+	SheetClose,
+	SheetContent,
+	SheetTrigger,
+} from "@/components/ui/sheet";
 import { authClient } from "@/lib/auth-client";
 import { cn } from "@/lib/utils";
 
 const primaryNavItems = [
 	{ href: "/explore", label: "角色", icon: Sparkles },
-	{ href: "/messages", label: "消息", icon: MessageCircle },
-	{ href: "/create", label: "创建", icon: Plus },
+	{ href: "/chat", label: "消息", icon: MessageCircle },
 	{ href: "/profile", label: "我的", icon: UserRound },
 ] as const;
 
@@ -47,13 +61,59 @@ const channelItems = [
 	"创作",
 ] as const;
 
+type DrawerItem = {
+	href?: string;
+	icon: LucideIcon;
+	label: string;
+	badge?: string;
+	trailing?: React.ReactNode;
+	onClick?: () => void;
+};
+
 function isNavActive(pathname: string, href: string) {
 	return pathname === href || (href !== "/explore" && pathname.startsWith(`${href}/`));
 }
 
+function AccountDrawerItem({
+	href,
+	icon: Icon,
+	label,
+	badge,
+	trailing,
+	onClick,
+}: DrawerItem) {
+	const content = (
+		<>
+			<Icon className="size-5 shrink-0" />
+			<span className="min-w-0 flex-1 truncate">{label}</span>
+			{badge ? (
+				<span className="rounded-full bg-[#ff2f75] px-2.5 py-1 text-xs font-semibold text-white">
+					{badge}
+				</span>
+			) : null}
+			{trailing}
+		</>
+	);
+	const className =
+		"flex w-full items-center gap-3 rounded-lg px-2.5 py-2.5 text-left text-sm text-white/90 transition-colors hover:bg-white/[0.07]";
+
+	if (href) {
+		return (
+			<Link href={href} className={className}>
+				{content}
+			</Link>
+		);
+	}
+
+	return (
+		<button className={className} type="button" onClick={onClick}>
+			{content}
+		</button>
+	);
+}
+
 export function SiteHeader() {
 	const pathname = usePathname();
-	const router = useRouter();
 	const { setTheme } = useTheme();
 	const { data: session, isPending } = authClient.useSession();
 	const [isSigningOut, setIsSigningOut] = React.useState(false);
@@ -142,41 +202,129 @@ export function SiteHeader() {
 					{isPending ? (
 						<span className="size-9 rounded-full border bg-muted" />
 					) : user ? (
-						<DropdownMenu>
-							<DropdownMenuTrigger className="rounded-full outline-none focus-visible:ring-3 focus-visible:ring-ring/50">
+						<Sheet>
+							<SheetTrigger className="rounded-full outline-none focus-visible:ring-3 focus-visible:ring-ring/50">
 								<Avatar className="size-9" size="lg">
 									<AvatarImage alt={userName} src={user.image || undefined} />
 									<AvatarFallback>{userInitial}</AvatarFallback>
 								</Avatar>
-								<span className="sr-only">打开账号菜单</span>
-							</DropdownMenuTrigger>
-							<DropdownMenuContent align="end" className="w-56">
-								<div className="space-y-1 px-1.5 py-1">
-									<p className="truncate text-sm font-medium text-foreground">
-										{user.name || "已登录"}
-									</p>
-									{user.email ? (
-										<p className="truncate text-xs font-normal text-muted-foreground">
-											{user.email}
-										</p>
-									) : null}
+								<span className="sr-only">打开账号抽屉</span>
+							</SheetTrigger>
+							<SheetContent
+								className="data-[side=right]:w-[min(100vw,340px)] gap-0 border-white/10 bg-[#07070a] p-0 text-white data-[side=right]:sm:max-w-none"
+								showCloseButton={false}
+							>
+								<SheetClose
+									className={cn(
+										buttonVariants({ variant: "ghost", size: "icon" }),
+										"absolute right-4 top-4 text-white/70 hover:bg-white/10 hover:text-white"
+									)}
+								>
+									<X className="size-5" />
+									<span className="sr-only">关闭</span>
+								</SheetClose>
+
+								<div className="flex-1 overflow-y-auto px-5 py-6">
+									<div className="flex items-center gap-3 pr-10">
+										<Avatar className="size-14" size="lg">
+											<AvatarImage alt={userName} src={user.image || undefined} />
+											<AvatarFallback>{userInitial}</AvatarFallback>
+										</Avatar>
+										<div className="min-w-0">
+											<p className="truncate text-xl font-semibold">
+												{user.name || user.email || "已登录"}
+											</p>
+											<div className="mt-1.5 flex items-center gap-2 text-xs text-white/55">
+												<span className="rounded-full bg-white/15 px-2 py-0.5 font-semibold text-white">
+													VIP0
+												</span>
+												<span>充值 1 积分升级 VIP1</span>
+											</div>
+										</div>
+									</div>
+
+									<div className="mt-6 flex items-center justify-between rounded-lg bg-white/[0.04] p-3.5">
+										<div className="flex items-center gap-3">
+											<div className="flex size-10 items-center justify-center rounded-full bg-[#ff2f75]/15 text-[#ff2f75]">
+												<Wallet className="size-5" />
+											</div>
+											<div>
+												<div className="flex items-baseline gap-2.5">
+													<span className="text-xs text-white/55">余额</span>
+													<span className="font-mono text-2xl font-bold">0.80</span>
+												</div>
+												<div className="mt-0.5 flex items-baseline gap-2.5">
+													<span className="text-xs text-white/55">限时</span>
+													<span className="font-mono text-base text-white/60">0.00</span>
+												</div>
+											</div>
+										</div>
+										<Link
+											href="/pricing"
+											className="rounded-full bg-[#ff2f75] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#ff4b88]"
+										>
+											充值
+										</Link>
+									</div>
+
+									<div className="mt-6 space-y-2">
+										<Link
+											href="/chat"
+											className="flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-white transition-colors hover:bg-white/[0.07]"
+										>
+											<span className="text-base font-semibold">通知消息</span>
+											<span className="rounded-full bg-[#ff2f75] px-2 py-0.5 text-xs font-semibold text-white">
+												4
+											</span>
+											<ChevronRight className="ml-auto size-4 text-white/45" />
+										</Link>
+										<div className="space-y-1 px-2.5 text-xs text-white/65">
+											<p className="truncate">💎 Sigma-0417 上架，智力与文风升级</p>
+											<p className="truncate">⚠️ 第三方低价代充风险提醒</p>
+										</div>
+									</div>
+
+									<nav className="mt-6 space-y-0.5">
+										<AccountDrawerItem href="/create" icon={PenLine} label="角色卡" />
+										<AccountDrawerItem href="/pricing" icon={Gift} label="邀请好友" badge="奖励" />
+										<AccountDrawerItem href="/profile" icon={Award} label="创作者奖励" />
+										<AccountDrawerItem
+											icon={Moon}
+											label="深色"
+											onClick={() => setTheme("dark")}
+											trailing={<ChevronDown className="size-5 text-white/45" />}
+										/>
+										<AccountDrawerItem
+											icon={Languages}
+											label="简体中文"
+											trailing={<ChevronDown className="size-5 text-white/45" />}
+										/>
+										<AccountDrawerItem href="/pricing" icon={CreditCard} label="充值" badge="优惠" />
+										<AccountDrawerItem href="/profile" icon={Headphones} label="帮助中心" />
+										<AccountDrawerItem
+											icon={LogOut}
+											label={isSigningOut ? "退出中..." : "退出登录"}
+											onClick={signOut}
+										/>
+									</nav>
 								</div>
-								<DropdownMenuSeparator />
-								<DropdownMenuItem onClick={() => router.push("/profile")}>
-									<UserRound className="size-4" />
-									我的主页
-								</DropdownMenuItem>
-								<DropdownMenuItem onClick={() => router.push("/pricing")}>
-									<CreditCard className="size-4" />
-									订阅
-								</DropdownMenuItem>
-								<DropdownMenuSeparator />
-								<DropdownMenuItem disabled={isSigningOut} onClick={signOut}>
-									<LogOut className="size-4" />
-									{isSigningOut ? "退出中..." : "退出登录"}
-								</DropdownMenuItem>
-							</DropdownMenuContent>
-						</DropdownMenu>
+
+								<div className="border-t border-white/10 px-5 py-4 text-center text-xs text-white/40">
+									<div className="mb-2.5 flex justify-center gap-2.5">
+										<div className="flex size-9 items-center justify-center rounded-full bg-white/[0.06]">
+											<Bell className="size-4" />
+										</div>
+										<div className="flex size-9 items-center justify-center rounded-full bg-white/[0.06]">
+											<MessageCircle className="size-4" />
+										</div>
+										<div className="flex size-9 items-center justify-center rounded-full bg-white/[0.06]">
+											<Sparkles className="size-4" />
+										</div>
+									</div>
+									<p>社区公约 · 服务协议 · 隐私政策</p>
+								</div>
+							</SheetContent>
+						</Sheet>
 					) : (
 						<Link
 							href="/login"

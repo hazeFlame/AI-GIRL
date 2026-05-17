@@ -46,6 +46,7 @@ import { cn } from "@/lib/utils";
 const primaryNavItems = [
 	{ href: "/explore", label: "角色", icon: Sparkles },
 	{ href: "/chat", label: "消息", icon: MessageCircle },
+	{ href: "/studio", label: "创作者中心", icon: PenLine },
 	{ href: "/profile", label: "我的", icon: UserRound },
 ] as const;
 
@@ -285,7 +286,7 @@ export function SiteHeader() {
 									</div>
 
 									<nav className="mt-6 space-y-0.5">
-										<AccountDrawerItem href="/create" icon={PenLine} label="角色卡" />
+										<AccountDrawerItem href="/studio" icon={PenLine} label="角色卡" />
 										<AccountDrawerItem href="/pricing" icon={Gift} label="邀请好友" badge="奖励" />
 										<AccountDrawerItem href="/profile" icon={Award} label="创作者奖励" />
 										<AccountDrawerItem

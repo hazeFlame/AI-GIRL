@@ -44,7 +44,7 @@ export default function ExplorePage() {
 						</div>
 					</div>
 
-					<Link href="/create">
+					<Link href="/studio?view=create">
 						<Button className="w-full gap-2 bg-[#ff6f91] text-white hover:bg-[#ff84a2] sm:w-auto">
 							<Plus className="size-4" />
 							创建角色

@@ -10,7 +10,7 @@ export default function AppLayout({
 	return (
 		<div className="min-h-screen bg-background">
 			<SiteHeader />
-			<main className="min-h-[calc(100svh-7rem)]">
+			<main className="min-h-[calc(100svh-7rem)] pb-16 md:pb-0">
 				{children}
 			</main>
 			<SiteFooter />

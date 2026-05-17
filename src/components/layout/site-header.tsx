@@ -135,13 +135,14 @@ export function SiteHeader() {
 	};
 
 	return (
+		<>
 		<header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
 			<div className="flex h-14 w-full items-center gap-3 px-4 md:px-6">
 				<Link href="/explore" className="flex shrink-0 items-center gap-2">
 					<span className="flex size-8 items-center justify-center rounded-lg bg-[#ff6f91] text-white shadow-sm">
 						<Sparkles className="size-4" />
 					</span>
-					<span className="hidden text-base font-semibold tracking-tight sm:inline">
+					<span className="text-base font-semibold tracking-tight">
 						AI Character
 					</span>
 				</Link>
@@ -199,6 +200,15 @@ export function SiteHeader() {
 							</DropdownMenuItem>
 						</DropdownMenuContent>
 					</DropdownMenu>
+
+					{/* Mobile Search Icon-Button */}
+					<Link
+						href="/explore"
+						className={cn(buttonVariants({ variant: "ghost", size: "icon" }), "h-9 w-9 lg:hidden text-muted-foreground")}
+						aria-label="搜索"
+					>
+						<Search className="size-4" />
+					</Link>
 
 					{isPending ? (
 						<span className="size-9 rounded-full border bg-muted" />
@@ -339,28 +349,7 @@ export function SiteHeader() {
 			</div>
 
 			<div className="border-t bg-background/80">
-				<nav className="scrollbar-none flex w-full items-center gap-5 overflow-x-auto px-4 md:px-6">
-					<div className="flex items-center gap-1 py-2 md:hidden">
-						{primaryNavItems.map((item) => {
-							const Icon = item.icon;
-							const active = isNavActive(pathname, item.href);
-
-							return (
-								<Link
-									key={item.href}
-									href={item.href}
-									className={cn(
-										"flex h-8 shrink-0 items-center gap-1.5 rounded-lg px-2.5 text-sm font-medium text-muted-foreground transition-colors",
-										active && "bg-muted text-foreground"
-									)}
-								>
-									<Icon className="size-4" />
-									{item.label}
-								</Link>
-							);
-						})}
-					</div>
-					<div className="hidden h-4 w-px shrink-0 bg-border md:block" />
+				<nav className="flex w-full items-center gap-5 overflow-x-auto px-4 md:px-6 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
 					{channelItems.map((item) => (
 						<Link
 							key={item}
@@ -383,5 +372,30 @@ export function SiteHeader() {
 				</nav>
 			</div>
 		</header>
+
+		{/* Sticky Bottom Navigation Bar for Mobile Devices */}
+		<div className="fixed bottom-0 left-0 right-0 z-50 border-t bg-background/95 backdrop-blur-md py-2.5 px-4 md:hidden shadow-[0_-4px_20px_rgba(0,0,0,0.05)] pb-safe">
+			<nav className="flex items-center justify-around w-full max-w-md mx-auto">
+				{primaryNavItems.map((item) => {
+					const Icon = item.icon;
+					const active = isNavActive(pathname, item.href);
+
+					return (
+						<Link
+							key={item.href}
+							href={item.href}
+							className={cn(
+								"flex flex-col items-center gap-1 px-3 py-0.5 text-[11px] font-medium transition-all duration-200 rounded-lg active:scale-95",
+								active ? "text-[#ff6f91]" : "text-muted-foreground hover:text-foreground"
+							)}
+						>
+							<Icon className="size-5 shrink-0" />
+							<span>{item.label}</span>
+						</Link>
+					);
+				})}
+			</nav>
+		</div>
+		</>
 	);
 }

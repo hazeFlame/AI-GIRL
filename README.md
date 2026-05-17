@@ -30,6 +30,33 @@ graph TD
 
 ---
 
+## 📦 核心依赖与三方库 (Package Dependencies)
+
+项目在 `package.json` 中选用了轻量级、边缘计算兼容的优秀开源库链：
+
+### 1. 核心运行时与适配层
+*   `next` (`16.2.6`) & `react` (`^19.1.7`): 顶尖 React 19 应用路由核心框架。
+*   `@opennextjs/cloudflare` (`^1.19.9`) & `wrangler` (`^4.91.0`): Cloudflare 边缘部署、模拟及路由分发适配核心。
+
+### 2. 用户会话与数据层
+*   `better-auth` (`^1.6.11`): 极速无状态、零信任分布式身份校验引擎。
+*   `drizzle-orm` (`^0.45.2`) & `drizzle-kit` (`^0.31.10`): 高性能 SQLite / D1 ORM 底层框架，支持秒级自动生成数据库迁移（Migrations）。
+
+### 3. AI 大模型流式应用
+*   `ai` (`^6.0.182`) & `@ai-sdk/react` (`^3.0.184`): Vercel AI SDK 行业旗舰，赋能极速流式对话、自动状态同步与聊天钩子（Hooks）。
+
+### 4. 动效与交互微特效
+*   `framer-motion` (`^12.38.0`): 强大的物理级动效与姿态转换库。
+*   `@number-flow/react` (`^0.6.0`): 一款精美的卡片数字平滑滑动翻滚动画库，用于订阅结算动态效果。
+*   `lucide-react` (`^1.16.0`): 最全面的现代轻量级 SVG 动态矢量图标集。
+*   `zustand` (`^5.0.13`): 轻量反应式全局状态管理 Store。
+
+### 5. 高级 CSS 与组件构建链
+*   `tailwindcss` (`^4`) & `@tailwindcss/postcss` (`^4`): 新一代极致渲染级高性能 CSS 样式编译体系。
+*   `class-variance-authority`, `clsx`, `tailwind-merge`: Shadcn UI 与动态多态组件类名合并原子化工具。
+
+---
+
 ## 📂 项目目录结构 (Directory Map)
 
 项目文件结构采用 Next.js 推荐的模块化最佳实践：

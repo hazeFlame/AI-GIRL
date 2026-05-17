@@ -13,7 +13,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
@@ -107,12 +106,12 @@ export function SiteHeader() {
                   <span className="hidden max-w-28 truncate sm:inline">{user.name || user.email}</span>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-56">
-                  <DropdownMenuLabel className="space-y-1">
+                  <div className="space-y-1 px-1.5 py-1">
                     <p className="truncate text-sm font-medium text-foreground">{user.name || "Signed in"}</p>
                     {user.email ? (
                       <p className="truncate text-xs font-normal text-muted-foreground">{user.email}</p>
                     ) : null}
-                  </DropdownMenuLabel>
+                  </div>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem disabled={isSigningOut} onClick={signOut}>
                     <LogOut className="size-4" />

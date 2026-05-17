@@ -12,7 +12,7 @@ export default async function ChatPage() {
 
 	return (
 		<div className="flex-1 p-4 md:p-8">
-			<div className="mx-auto flex h-full w-full max-w-5xl flex-col">
+			<div className="flex h-full w-full flex-col">
 				<div className="border-b pb-5">
 					<p className="text-sm text-muted-foreground">Welcome, {firstName}</p>
 					<h1 className="mt-1 text-2xl font-semibold tracking-tight">Chat</h1>

@@ -44,7 +44,7 @@ export const plans: PricingPlan[] = [
   },
   {
     name: "终身相伴",
-    price: 199.99,
+    price: 99.99,
     yearlyPrice: 199.99,
     isOneTime: true,
     description: "一次订购，永恒誓言。终身免除订阅费用相伴左右。",

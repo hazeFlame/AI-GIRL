@@ -155,7 +155,7 @@ export function PricingSection() {
         </TimelineContent>
       </article>
 
-      <div className="grid md:grid-cols-3 max-w-6xl gap-8 px-4 mx-auto relative z-10">
+      <div className="relative z-10 grid w-full gap-8 px-4 md:grid-cols-3 md:px-6">
         {plans.map((plan, index) => (
           <TimelineContent
             key={plan.name}

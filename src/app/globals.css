@@ -128,3 +128,34 @@
     @apply font-sans;
 	}
 }
+
+@layer utilities {
+	.scrollbar-none {
+		scrollbar-width: none;
+		-ms-overflow-style: none;
+	}
+
+	.scrollbar-none::-webkit-scrollbar {
+		display: none;
+	}
+
+	.landing-marquee-track {
+		display: flex;
+		width: max-content;
+		animation: landing-marquee-scroll 45s linear infinite;
+	}
+
+	.landing-marquee-track:hover {
+		animation-play-state: paused;
+	}
+}
+
+@keyframes landing-marquee-scroll {
+	0% {
+		transform: translateX(0);
+	}
+
+	100% {
+		transform: translateX(-50%);
+	}
+}

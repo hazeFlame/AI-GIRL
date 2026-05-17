@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { CreditCard, Globe, LogOut, Menu, MessageSquare, Moon, Sun, User } from "lucide-react"
+import { CreditCard, Globe, LayoutDashboard, LogOut, Menu, MessageSquare, Moon, Sun, User } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useTheme } from "next-themes"
 
@@ -57,12 +57,19 @@ export function SiteHeader() {
           <SheetContent side="left" className="w-64 p-0">
             <SheetHeader className="p-4 border-b text-left">
               <SheetTitle>
-                <Link href="/" className="font-bold text-xl tracking-tight text-primary">
+                <Link href="/dashboard" className="font-bold text-xl tracking-tight text-primary">
                   AI Character
                 </Link>
               </SheetTitle>
             </SheetHeader>
             <nav className="flex flex-col gap-2 p-4">
+              <Link
+                href="/dashboard"
+                className="flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-md hover:bg-accent hover:text-accent-foreground transition-colors"
+              >
+                <LayoutDashboard className="w-4 h-4" />
+                <span>Dashboard</span>
+              </Link>
               <Link
                 href="/chat"
                 className="flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-md hover:bg-accent hover:text-accent-foreground transition-colors"
@@ -87,7 +94,7 @@ export function SiteHeader() {
             </nav>
           </SheetContent>
         </Sheet>
-        <Link href="/" className="md:hidden font-bold text-lg tracking-tight text-primary mr-2">
+        <Link href="/dashboard" className="md:hidden font-bold text-lg tracking-tight text-primary mr-2">
           AI Character
         </Link>
         <div className="flex flex-1 items-center justify-end space-x-2 md:justify-end">

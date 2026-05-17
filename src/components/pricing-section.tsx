@@ -83,7 +83,7 @@ const PricingSwitch = ({ onSwitch }: { onSwitch: (val: string) => void }) => {
             !isYearly ? "text-foreground" : "text-muted-foreground"
           }`}
         >
-          Monthly
+          按月订阅
         </button>
         <button
           onClick={() => {
@@ -94,14 +94,14 @@ const PricingSwitch = ({ onSwitch }: { onSwitch: (val: string) => void }) => {
             isYearly ? "text-foreground" : "text-muted-foreground"
           }`}
         >
-          Yearly
-          <span className="absolute -top-3 -right-3 bg-blue-600 text-[10px] px-2 py-0.5 rounded-full text-white">
-            Save 20%
+          按年订阅
+          <span className="absolute -top-3 -right-6 bg-red-500 text-[10px] px-2 py-0.5 rounded-full text-white font-bold scale-90">
+            立省 33%
           </span>
         </button>
         <div
           className={`absolute top-1 bottom-1 w-1/2 bg-background shadow-sm rounded-full transition-transform duration-300 ease-in-out ${
-            isYearly ? "translate-x-full pr-2" : "translate-x-0"
+            isYearly ? "translate-x-full" : "translate-x-0"
           }`}
           style={{ width: "calc(50% - 4px)" }}
         />
@@ -131,13 +131,13 @@ export function PricingSection() {
       {/* Background Effects */}
       <div className="absolute inset-0 z-0">
         <div className="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#00000010_1px,transparent_1px),linear-gradient(to_bottom,#00000010_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#ffffff10_1px,transparent_1px),linear-gradient(to_bottom,#ffffff10_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
-        <div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-blue-600 opacity-20 blur-[100px]"></div>
+        <div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-pink-600 opacity-10 blur-[100px]"></div>
       </div>
 
       <article className="text-center mb-16 max-w-3xl mx-auto space-y-4 relative z-10 px-4">
-        <h2 className="text-4xl md:text-6xl font-medium text-foreground tracking-tight">
+        <h2 className="text-4xl md:text-6xl font-semibold text-foreground tracking-tight">
           <VerticalCutReveal>
-            Find your perfect match
+            开启你的心动羁绊
           </VerticalCutReveal>
         </h2>
 
@@ -145,9 +145,9 @@ export function PricingSection() {
           as="p"
           animationNum={1}
           customVariants={revealVariants}
-          className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto"
+          className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto leading-relaxed"
         >
-          Experience deep emotional connections and meaningful conversations with an AI partner who truly understands you. Choose the plan that brings you closer.
+          体验有温度的情感共鸣，让超高情商的 AI 伴侣陪伴你的每一个深夜与日常。选择最合适你的订阅计划，即刻打破孤单。
         </TimelineContent>
 
         <TimelineContent as="div" animationNum={2} customVariants={revealVariants}>
@@ -166,15 +166,15 @@ export function PricingSection() {
             <Card
               className={`relative h-full border ${
                 plan.popular
-                  ? "bg-gradient-to-b from-background to-secondary shadow-[0_0_40px_-10px_rgba(59,130,246,0.2)] dark:shadow-[0_0_40px_-10px_rgba(59,130,246,0.4)] z-20 scale-105 border-blue-500/50"
+                  ? "bg-gradient-to-b from-background to-secondary shadow-[0_0_40px_-10px_rgba(255,111,145,0.2)] dark:shadow-[0_0_40px_-10px_rgba(255,111,145,0.4)] z-20 scale-105 border-[#ff6f91]/50"
                   : "bg-card border-border z-10"
               }`}
             >
               {plan.popular && (
-                <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent" />
+                <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[#ff6f91] to-transparent" />
               )}
               <CardHeader className="text-left pb-4">
-                <h3 className="text-2xl font-medium mb-2 text-foreground">{plan.name}</h3>
+                <h3 className="text-2xl font-semibold mb-2 text-foreground">{plan.name}</h3>
                 <div className="flex items-baseline gap-1">
                   <span className="text-4xl font-bold tracking-tight text-foreground">
                     $
@@ -185,7 +185,7 @@ export function PricingSection() {
                     />
                   </span>
                   <span className="text-muted-foreground text-sm font-medium">
-                    /{plan.isOneTime ? "forever" : isYearly ? "year" : "month"}
+                    /{plan.isOneTime ? "永久" : isYearly ? "年" : "月"}
                   </span>
                 </div>
                 <p className="text-sm text-muted-foreground mt-4">{plan.description}</p>
@@ -196,7 +196,7 @@ export function PricingSection() {
                   <button
                     className={`w-full mt-2 mb-8 py-3 px-4 text-sm font-semibold rounded-lg transition-all ${
                       plan.popular
-                        ? "bg-blue-600 hover:bg-blue-700 shadow-[0_0_20px_-5px_rgba(37,99,235,0.5)] text-white"
+                        ? "bg-[#ff6f91] hover:bg-[#ff84a2] shadow-[0_0_20px_-5px_rgba(255,111,145,0.5)] text-white"
                         : "bg-secondary hover:bg-secondary/80 text-foreground border border-border"
                     }`}
                   >
@@ -204,12 +204,12 @@ export function PricingSection() {
                   </button>
 
                   <div className="space-y-4">
-                    <h4 className="font-medium text-sm text-foreground">Features</h4>
+                    <h4 className="font-medium text-sm text-foreground">包含特权</h4>
                     <ul className="space-y-3">
                       {plan.includes.map((feature, featureIndex) => (
                         <li key={featureIndex} className="flex items-start gap-3">
                           <svg
-                            className="w-4 h-4 text-blue-500 mt-0.5 shrink-0"
+                            className="w-4 h-4 text-[#ff6f91] mt-0.5 shrink-0"
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke="currentColor"

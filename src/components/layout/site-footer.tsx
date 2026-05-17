@@ -6,7 +6,7 @@ export function SiteFooter() {
           Built with Next.js and Cloudflare. The ultimate AI Companion experience.
         </p>
         <div className="text-sm text-muted-foreground">
-          © {new Date().getFullYear()} AI Girl. All rights reserved.
+          © {new Date().getFullYear()} AI Character. All rights reserved.
         </div>
       </div>
     </footer>

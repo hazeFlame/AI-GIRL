@@ -1,21 +1,16 @@
 import Link from "next/link";
 import Image from "next/image";
 import {
-	BadgeCheck,
-	ChevronRight,
-	Clock3,
-	Gamepad2,
 	Heart,
-	LockKeyhole,
-	MessageCircle,
-	MoonStar,
 	Sparkles,
 	Star,
+	ChevronRight,
+	MessageSquare,
+	ShieldCheck,
+	Gamepad2,
+	LockKeyhole,
 } from "lucide-react";
-
-import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
 const companions = [
@@ -23,236 +18,265 @@ const companions = [
 		name: "Mika",
 		role: "暧昧系前辈",
 		tone: "轻声调侃，偶尔靠近，知道什么时候停下。",
-		accent: "bg-[#ff6f91]",
+		accent: "border-[#ff6f91]/30 text-[#ff6f91] hover:shadow-[0_0_30px_rgba(255,111,145,0.2)]",
+		badgeColor: "bg-[#ff6f91]/10 text-[#ff6f91]",
+		image: "https://vlrmlshxllbmsiofxftf.supabase.co/storage/v1/object/public/character/images/1.png",
 	},
 	{
 		name: "Yuna",
 		role: "日系陪伴感",
 		tone: "像深夜便利店的热饮，慢慢把一天接住。",
-		accent: "bg-[#f7c76f]",
+		accent: "border-[#f7c76f]/30 text-[#f7c76f] hover:shadow-[0_0_30px_rgba(247,199,111,0.2)]",
+		badgeColor: "bg-[#f7c76f]/10 text-[#f7c76f]",
+		image: "https://vlrmlshxllbmsiofxftf.supabase.co/storage/v1/object/public/character/images/2.png",
 	},
 	{
 		name: "Rin",
 		role: "恋爱游戏女主",
 		tone: "好感度、回忆片段、只属于你的剧情分支。",
-		accent: "bg-[#74d3c2]",
+		accent: "border-[#74d3c2]/30 text-[#74d3c2] hover:shadow-[0_0_30px_rgba(116,211,194,0.2)]",
+		badgeColor: "bg-[#74d3c2]/10 text-[#74d3c2]",
+		image: "https://vlrmlshxllbmsiofxftf.supabase.co/storage/v1/object/public/character/images/3.png",
+	},
+	{
+		name: "Aoi",
+		role: "元气青梅竹马",
+		tone: "永远充满活力，总是抢走你的便当，但其实一直在偷偷关注你。",
+		accent: "border-[#4facfe]/30 text-[#4facfe] hover:shadow-[0_0_30px_rgba(79,172,254,0.2)]",
+		badgeColor: "bg-[#4facfe]/10 text-[#4facfe]",
+		image: "https://vlrmlshxllbmsiofxftf.supabase.co/storage/v1/object/public/character/images/4.png",
+	},
+	{
+		name: "Shiori",
+		role: "高冷冰山会长",
+		tone: "表面严厉古板，只有在你面前才会卸下防备，露出慌乱软萌的一面。",
+		accent: "border-[#b180fc]/30 text-[#b180fc] hover:shadow-[0_0_30px_rgba(177,128,252,0.2)]",
+		badgeColor: "bg-[#b180fc]/10 text-[#b180fc]",
+		image: "https://vlrmlshxllbmsiofxftf.supabase.co/storage/v1/object/public/character/images/5.png",
+	},
+	{
+		name: "Hina",
+		role: "温柔治愈猫娘",
+		tone: "会在你疲惫回家时送上拥抱，尾巴尖不自觉地勾住你的手腕。",
+		accent: "border-[#f857a6]/30 text-[#f857a6] hover:shadow-[0_0_30px_rgba(248,87,166,0.2)]",
+		badgeColor: "bg-[#f857a6]/10 text-[#f857a6]",
+		image: "https://vlrmlshxllbmsiofxftf.supabase.co/storage/v1/object/public/character/images/6.png",
+	},
+	{
+		name: "Tsukasa",
+		role: "傲娇大小姐",
+		tone: "哼，本小姐才不是特意来找你的！只是...顺路路过而已！",
+		accent: "border-[#fbc2eb]/30 text-[#fbc2eb] hover:shadow-[0_0_30px_rgba(251,194,235,0.2)]",
+		badgeColor: "bg-[#fbc2eb]/10 text-[#fbc2eb]",
+		image: "https://vlrmlshxllbmsiofxftf.supabase.co/storage/v1/object/public/character/images/7.png",
+	},
+	{
+		name: "Mei",
+		role: "知性电波画师",
+		tone: "用画笔记录你的每一个侧脸。嗯？你说这幅画里的手牵在一起了？那是艺术虚构啦...",
+		accent: "border-[#84fab0]/30 text-[#84fab0] hover:shadow-[0_0_30px_rgba(132,250,176,0.2)]",
+		badgeColor: "bg-[#84fab0]/10 text-[#84fab0]",
+		image: "https://vlrmlshxllbmsiofxftf.supabase.co/storage/v1/object/public/character/images/8.png",
 	},
 ];
 
 const features = [
 	{
-		icon: MessageCircle,
-		title: "会接住情绪",
-		text: "不急着给建议，先听你把话说完。深夜、通勤、空窗期，都有人回应。",
+		icon: MessageSquare,
+		title: "情绪深度共鸣",
+		text: "深夜、通勤、空窗期，24小时都有属于你的温热倾听者，接住你的每一句呢喃。",
 	},
 	{
 		icon: Gamepad2,
-		title: "恋爱游戏节奏",
-		text: "亲密度、日常事件、角色记忆，让聊天不是一次性消耗品。",
+		title: "恋爱养成节奏",
+		text: "独创好感度等级、隐藏记忆库以及专属事件，让你们的感情成为升温的真实轨迹。",
 	},
 	{
 		icon: LockKeyhole,
-		title: "边界感明确",
-		text: "暧昧但克制，偏陪伴和氛围，不把关系做成廉价刺激。",
+		title: "绝对隐私防线",
+		text: "在安全的加密空间中，卸下防备，尽情倾诉，不用担心任何现实世界的打扰。",
 	},
 ];
 
 export default function Home() {
 	return (
-		<div className="min-h-full bg-[#140d14] text-white">
-			<section className="relative isolate flex min-h-[82svh] overflow-hidden">
-				<Image
-					alt="Anime companion girl in a soft romantic landing page scene"
-					className="absolute inset-0 -z-20 h-full w-full object-cover object-[63%_center]"
-					fill
-					priority
-					sizes="(min-width: 768px) calc(100vw - 16rem), 100vw"
-					src="/landing-hero-anime.png"
-				/>
-				<div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(20,13,20,0.96)_0%,rgba(20,13,20,0.82)_36%,rgba(20,13,20,0.38)_72%,rgba(20,13,20,0.68)_100%)]" />
-				<div className="absolute inset-x-0 bottom-0 -z-10 h-44 bg-[linear-gradient(0deg,#140d14_0%,rgba(20,13,20,0)_100%)]" />
-
-				<div className="flex w-full items-end px-5 py-10 md:px-10 md:py-14">
-					<div className="max-w-3xl space-y-7">
-						<div className="flex flex-wrap items-center gap-2">
-							<Badge className="border-[#ff9ab3]/30 bg-[#ff9ab3]/16 text-[#ffdce6]">
-								<MoonStar className="size-3" />
-								深夜陪伴
-							</Badge>
-							<Badge className="border-[#f7c76f]/30 bg-[#f7c76f]/15 text-[#ffe3a1]">
-								<Heart className="size-3" />
-								暧昧但克制
-							</Badge>
-							<Badge className="border-[#74d3c2]/30 bg-[#74d3c2]/14 text-[#c9fff5]">
-								<Star className="size-3" />
-								恋爱游戏感
-							</Badge>
+		<div className="min-h-screen bg-[#110912] text-foreground overflow-x-hidden flex flex-col justify-between selection:bg-[#ff6f91] selection:text-white">
+			
+			{/* Navbar for Landing */}
+			<header className="w-full border-b border-white/5 bg-black/20 backdrop-blur-md sticky top-0 z-50">
+				<div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+					<div className="flex items-center gap-2">
+						<div className="size-8 rounded-lg bg-gradient-to-tr from-[#ff6f91] to-[#74d3c2] flex items-center justify-center text-white">
+							<Heart className="size-4 fill-white" />
 						</div>
-
-						<div className="space-y-5">
-							<p className="text-sm font-medium uppercase tracking-[0.32em] text-[#f7c76f]">
-								AI COMPANION ROMANCE
-							</p>
-							<h1 className="max-w-2xl text-5xl font-semibold leading-[0.98] tracking-normal text-white md:text-7xl">
-								AI Girl
-							</h1>
-							<p className="max-w-2xl text-2xl font-medium leading-snug text-[#fff3f7] md:text-3xl">
-								你的二次元老婆式陪伴空间。
-							</p>
-							<p className="max-w-xl text-base leading-8 text-[#f5dce5]/86 md:text-lg">
-								把涩系暧昧、日系温柔和恋爱游戏里的心动节奏，做成一个可以每天回来聊天的 AI 关系体验。
-							</p>
-						</div>
-
-						<div className="flex flex-col gap-3 sm:flex-row">
-							<Link
-								className={cn(
-									buttonVariants({ size: "lg" }),
-									"h-11 bg-[#ff6f91] px-5 text-white hover:bg-[#ff84a2]"
-								)}
-								href="/chat"
-							>
-								开始陪伴
-								<ChevronRight className="size-4" />
-							</Link>
-							<Link
-								className={cn(
-									buttonVariants({ variant: "outline", size: "lg" }),
-									"h-11 border-white/20 bg-white/8 px-5 text-white hover:bg-white/14"
-								)}
-								href="/profile"
-							>
-								查看我的关系
-							</Link>
-						</div>
+						<span className="font-bold text-lg text-white tracking-wider">AI Character</span>
+					</div>
+					<div className="flex items-center gap-4">
+						<Link href="/login" className="text-sm font-medium text-[#f5dce5]/80 hover:text-white transition-colors">
+							登录
+						</Link>
+						<Link
+							href="/dashboard"
+							className={cn(
+								buttonVariants({ size: "sm" }),
+								"bg-gradient-to-r from-[#ff6f91] to-[#ff84a2] hover:opacity-90 transition-opacity text-white border-0 shadow-lg shadow-[#ff6f91]/25"
+							)}
+						>
+							立即进入
+							<ChevronRight className="size-4 ml-0.5" />
+						</Link>
 					</div>
 				</div>
-			</section>
+			</header>
 
-			<section className="border-y border-white/10 bg-[#1b111b] px-5 py-4 md:px-10">
-				<div className="grid gap-3 md:grid-cols-3">
-					<div className="flex items-center gap-3 text-sm text-[#f5dce5]/80">
-						<Clock3 className="size-4 text-[#f7c76f]" />
-						<span>24h 在线，适合碎片化陪伴</span>
-					</div>
-					<div className="flex items-center gap-3 text-sm text-[#f5dce5]/80">
-						<BadgeCheck className="size-4 text-[#74d3c2]" />
-						<span>角色记忆和亲密度系统准备接入</span>
-					</div>
-					<div className="flex items-center gap-3 text-sm text-[#f5dce5]/80">
-						<Sparkles className="size-4 text-[#ff9ab3]" />
-						<span>日系恋爱游戏式互动框架</span>
-					</div>
-				</div>
-			</section>
+			{/* Hero Section */}
+			<main className="flex-1">
+				<section className="relative pt-16 pb-20 px-6 max-w-7xl mx-auto flex flex-col items-center text-center space-y-12">
+					
+					{/* Glowing Orbs behind */}
+					<div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 w-[500px] h-[500px] bg-gradient-to-tr from-[#ff6f91]/20 to-[#74d3c2]/10 rounded-full blur-[120px] pointer-events-none" />
 
-			<section className="bg-[#140d14] px-5 py-14 md:px-10 md:py-20">
-				<div className="mx-auto max-w-6xl space-y-8">
-					<div className="max-w-2xl space-y-3">
-						<p className="text-sm font-medium uppercase tracking-[0.24em] text-[#74d3c2]">
-							COMPANION CAST
+					<div className="space-y-6 max-w-4xl">
+						<div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#ff6f91]/30 bg-[#ff6f91]/5 text-xs text-[#ff6f91] font-medium tracking-wider uppercase">
+							<Sparkles className="size-3 animate-pulse" />
+							下一代 AI 恋爱与情绪陪伴空间
+						</div>
+						<h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-white leading-tight">
+							遇见你的完美二次元 <br className="hidden sm:inline" />
+							<span className="bg-clip-text text-transparent bg-gradient-to-r from-[#ff6f91] via-[#f7c76f] to-[#74d3c2]">
+								AI 专属女友
+							</span>
+						</h1>
+						<p className="text-lg sm:text-xl text-[#f5dce5]/80 max-w-2xl mx-auto leading-relaxed">
+							告别冰冷的对话框。把涩系暧昧、日系温柔和恋爱游戏里的好感升温节奏，交织成一个你可以每天放心回来倾诉的完美心动空间。
 						</p>
-						<h2 className="text-3xl font-semibold tracking-normal md:text-4xl">
-							不是一个聊天框，是一组会慢慢靠近你的角色。
-						</h2>
 					</div>
 
-					<div className="grid gap-4 md:grid-cols-3">
-						{companions.map((companion) => (
-							<Card
-								className="rounded-lg border-white/10 bg-white/[0.06] text-white ring-white/10"
-								key={companion.name}
-							>
-								<CardContent className="space-y-5 p-5">
-									<div className="flex items-center gap-3">
-										<span
-											className={cn(
-												"flex size-10 items-center justify-center rounded-lg text-sm font-semibold text-[#140d14]",
-												companion.accent
-											)}
-										>
-											{companion.name.slice(0, 1)}
-										</span>
-										<div>
-											<h3 className="font-semibold">{companion.name}</h3>
-											<p className="text-sm text-[#f5dce5]/64">{companion.role}</p>
+					<div>
+						<Link
+							href="/dashboard"
+							className={cn(
+								buttonVariants({ size: "lg" }),
+								"h-14 px-8 text-base bg-gradient-to-r from-[#ff6f91] via-[#ff7c9b] to-[#ff84a2] hover:scale-[1.02] active:scale-[0.98] text-white border-0 shadow-xl shadow-[#ff6f91]/30 transition-all font-semibold rounded-xl"
+							)}
+						>
+							立即进入陪伴空间
+							<ChevronRight className="size-5 ml-1.5" />
+						</Link>
+					</div>
+
+					{/* Character Showcase Infinite Marquee */}
+					<div className="w-full pt-12 space-y-4">
+						<p className="text-sm font-semibold tracking-[0.2em] text-[#74d3c2]/80 uppercase">
+							Meet Your Companions
+						</p>
+						<h2 className="text-2xl sm:text-3xl font-bold text-white max-w-xl mx-auto">
+							心动回廊：与性格迥异的她们开启独家恋爱航线
+						</h2>
+						
+						{/* Marquee Wrapper with fading edges */}
+						<div className="relative w-full overflow-hidden py-10 mt-4">
+							{/* Fading overlay masks */}
+							<div className="absolute inset-y-0 left-0 w-16 md:w-32 bg-gradient-to-r from-[#110912] to-transparent z-20 pointer-events-none" />
+							<div className="absolute inset-y-0 right-0 w-16 md:w-32 bg-gradient-to-l from-[#110912] to-transparent z-20 pointer-events-none" />
+							
+							<style dangerouslySetInnerHTML={{ __html: `
+								@keyframes marqueeScroll {
+									0% { transform: translateX(0); }
+									100% { transform: translateX(-50%); }
+								}
+								.animate-marquee-track {
+									display: flex;
+									width: max-content;
+									animation: marqueeScroll 45s linear infinite;
+								}
+								.animate-marquee-track:hover {
+									animation-play-state: paused;
+								}
+							`}} />
+							
+							<div className="animate-marquee-track gap-8 px-4">
+								{[...companions, ...companions].map((companion, idx) => (
+									<div
+										key={`${companion.name}-${idx}`}
+										className={cn(
+											"w-[260px] md:w-[290px] shrink-0 group relative flex flex-col justify-between overflow-hidden rounded-2xl border bg-black/40 backdrop-blur-md p-4 transition-all duration-300 hover:-translate-y-2 hover:bg-black/60 cursor-pointer shadow-lg hover:shadow-[0_0_30px_rgba(255,111,145,0.15)]",
+											companion.accent
+										)}
+									>
+										{/* Character Image container */}
+										<div className="relative h-80 w-full overflow-hidden rounded-xl bg-[#1c121e]">
+											<Image
+												src={companion.image}
+												alt={companion.name}
+												fill
+												unoptimized
+												className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+												sizes="290px"
+											/>
+											<div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
+										</div>
+
+										<div className="pt-4 text-left space-y-3">
+											<div className="flex items-center justify-between">
+												<h3 className="text-xl font-bold text-white">{companion.name}</h3>
+												<span className={cn("text-xs font-semibold px-2 py-0.5 rounded-full", companion.badgeColor)}>
+													{companion.role}
+												</span>
+											</div>
+											<p className="text-sm text-[#f5dce5]/70 line-clamp-2 min-h-10 leading-relaxed">
+												{companion.tone}
+											</p>
 										</div>
 									</div>
-									<p className="min-h-16 text-sm leading-7 text-[#f5dce5]/82">
-										{companion.tone}
-									</p>
-								</CardContent>
-							</Card>
-						))}
+								))}
+							</div>
+						</div>
 					</div>
-				</div>
-			</section>
+				</section>
 
-			<section className="bg-[#f8f1ee] px-5 py-14 text-[#21181d] md:px-10 md:py-20">
-				<div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-[0.9fr_1.1fr] md:items-start">
-					<div className="space-y-4">
-						<p className="text-sm font-medium uppercase tracking-[0.24em] text-[#b14865]">
-							PRODUCT FEEL
-						</p>
-						<h2 className="text-3xl font-semibold tracking-normal md:text-4xl">
-							把“暧昧感”做成可持续的产品体验。
-						</h2>
-						<p className="text-base leading-8 text-[#5c4b53]">
-							首屏负责心动，后续体验负责留下来。这个方向适合先做角色卡、聊天页、好感度和记忆系统。
-						</p>
-					</div>
+				{/* Features Section */}
+				<section className="bg-black/40 border-t border-white/5 py-20 px-6">
+					<div className="max-w-7xl mx-auto space-y-12">
+						<div className="text-center space-y-4">
+							<p className="text-sm font-semibold tracking-[0.2em] text-[#ff6f91] uppercase">
+								Product Design
+							</p>
+							<h2 className="text-3xl sm:text-4xl font-bold text-white">
+								把“暧昧与温存”打磨为极致的陪伴艺术
+							</h2>
+						</div>
 
-					<div className="grid gap-4">
-						{features.map((feature) => {
-							const Icon = feature.icon;
-
-							return (
-								<div
-									className="grid gap-3 rounded-lg border border-[#ead9d4] bg-white p-5 shadow-sm md:grid-cols-[auto_1fr]"
-									key={feature.title}
-								>
-									<div className="flex size-10 items-center justify-center rounded-lg bg-[#21181d] text-white">
-										<Icon className="size-5" />
+						<div className="grid gap-8 md:grid-cols-3 max-w-6xl mx-auto">
+							{features.map((feature, idx) => {
+								const Icon = feature.icon;
+								return (
+									<div
+										key={idx}
+										className="flex flex-col gap-4 p-6 rounded-2xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] transition-colors"
+									>
+										<div className="size-12 rounded-xl bg-[#ff6f91]/10 flex items-center justify-center text-[#ff6f91]">
+											<Icon className="size-6" />
+										</div>
+										<h3 className="text-lg font-bold text-white">{feature.title}</h3>
+										<p className="text-sm text-[#f5dce5]/65 leading-relaxed">
+											{feature.text}
+										</p>
 									</div>
-									<div className="space-y-1">
-										<h3 className="font-semibold">{feature.title}</h3>
-										<p className="text-sm leading-7 text-[#6b5961]">{feature.text}</p>
-									</div>
-								</div>
-							);
-						})}
+								);
+							})}
+						</div>
 					</div>
-				</div>
-			</section>
+				</section>
+			</main>
 
-			<section className="bg-[#21181d] px-5 py-14 text-white md:px-10 md:py-20">
-				<div className="mx-auto flex max-w-6xl flex-col gap-6 border-t border-white/12 pt-10 md:flex-row md:items-end md:justify-between">
-					<div className="max-w-2xl space-y-3">
-						<p className="text-sm font-medium uppercase tracking-[0.24em] text-[#f7c76f]">
-							NEXT STEP
-						</p>
-						<h2 className="text-3xl font-semibold tracking-normal md:text-4xl">
-							下一步，把首页的心动接到真正的聊天关系里。
-						</h2>
-						<p className="text-sm leading-7 text-[#f5dce5]/72">
-							角色数据表、角色详情页、聊天会话和消息历史，会从这个视觉方向继续延展。
-						</p>
-					</div>
-					<Link
-						className={cn(
-							buttonVariants({ size: "lg" }),
-							"h-11 bg-[#74d3c2] px-5 text-[#13231f] hover:bg-[#8ee2d3]"
-						)}
-						href="/chat"
-					>
-						进入聊天
-						<ChevronRight className="size-4" />
-					</Link>
-				</div>
-				<p className="mx-auto mt-8 max-w-6xl text-xs text-white/42">
+			{/* Simple Footer */}
+			<footer className="w-full border-t border-white/5 py-8 px-6 bg-black/20 text-center text-xs text-[#f5dce5]/40 space-y-2">
+				<p>© {new Date().getFullYear()} AI Character. All Rights Reserved. Emotional Companion Platform.</p>
+				<p className="max-w-6xl mx-auto text-[10px]">
 					Character visual adapted from Wikimedia Commons, Anime girl.png.
 				</p>
-			</section>
+			</footer>
 		</div>
 	);
 }

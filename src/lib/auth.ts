@@ -38,6 +38,11 @@ export function getAuth() {
 	return betterAuth({
 		baseURL: requireBinding(bindings, "BETTER_AUTH_URL"),
 		secret: requireBinding(bindings, "BETTER_AUTH_SECRET"),
+		advanced: {
+			ipAddress: {
+				ipAddressHeaders: ["cf-connecting-ip", "x-forwarded-for"],
+			},
+		},
 		database: drizzleAdapter(db, {
 			provider: "sqlite",
 			schema,

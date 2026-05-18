@@ -2,6 +2,8 @@
 
 一个基于 **Next.js 16 (React 19)** 与 **Cloudflare Edge 边缘计算架构** 打造的高保真、游戏化 AI 虚拟伴侣互动平台。
 
+> 重要：本项目是 Next.js + OpenNext 纯 Cloudflare Workers 部署，和传统 Node 服务端部署差异很大。修改渲染模式、路由预取、图片处理、缓存前请先阅读 [Cloudflare Worker Runtime Notes](./docs/cloudflare-worker-notes.md)。
+
 ---
 
 ## 🏗️ 整体项目架构 (Architecture)

@@ -12,6 +12,7 @@ export function CompanionGrid({ companions }: { companions: Companion[] }) {
 				<Link
 					key={companion.id}
 					href={`/character/${companion.id}`}
+					prefetch={false}
 					className="block h-full"
 				>
 					<Card className="group h-full overflow-hidden rounded-lg border-border/60 bg-card py-0 transition-all duration-300 hover:border-[#ff6f91]/30 hover:shadow-[0_0_30px_rgba(255,111,145,0.14)]">

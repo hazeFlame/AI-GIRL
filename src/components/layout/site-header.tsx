@@ -100,7 +100,7 @@ function AccountDrawerItem({
 
 	if (href) {
 		return (
-			<Link href={href} className={className}>
+			<Link href={href} prefetch={false} className={className}>
 				{content}
 			</Link>
 		);
@@ -138,7 +138,11 @@ export function SiteHeader() {
 		<>
 		<header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
 			<div className="flex h-14 w-full items-center gap-3 px-4 md:px-6">
-				<Link href="/explore" className="flex shrink-0 items-center gap-2">
+				<Link
+					href="/explore"
+					prefetch={false}
+					className="flex shrink-0 items-center gap-2"
+				>
 					<span className="flex size-8 items-center justify-center rounded-lg bg-[#ff6f91] text-white shadow-sm">
 						<Sparkles className="size-4" />
 					</span>
@@ -156,6 +160,7 @@ export function SiteHeader() {
 							<Link
 								key={item.href}
 								href={item.href}
+								prefetch={false}
 								className={cn(
 									buttonVariants({ variant: "ghost", size: "sm" }),
 									"gap-2 text-muted-foreground",
@@ -204,6 +209,7 @@ export function SiteHeader() {
 					{/* Mobile Search Icon-Button */}
 					<Link
 						href="/explore"
+						prefetch={false}
 						className={cn(buttonVariants({ variant: "ghost", size: "icon" }), "h-9 w-9 lg:hidden text-muted-foreground")}
 						aria-label="搜索"
 					>
@@ -272,6 +278,7 @@ export function SiteHeader() {
 										</div>
 										<Link
 											href="/pricing"
+											prefetch={false}
 											className="rounded-full bg-[#ff2f75] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#ff4b88]"
 										>
 											充值
@@ -281,6 +288,7 @@ export function SiteHeader() {
 									<div className="mt-6 space-y-2">
 										<Link
 											href="/chat"
+											prefetch={false}
 											className="flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-white transition-colors hover:bg-white/[0.07]"
 										>
 											<span className="text-base font-semibold">通知消息</span>
@@ -339,6 +347,7 @@ export function SiteHeader() {
 					) : (
 						<Link
 							href="/login"
+							prefetch={false}
 							className={cn(buttonVariants({ variant: "outline", size: "sm" }), "gap-2")}
 						>
 							<UserRound className="size-4" />
@@ -354,6 +363,7 @@ export function SiteHeader() {
 						<Link
 							key={item}
 							href="/explore"
+							prefetch={false}
 							className={cn(
 								"relative shrink-0 py-3 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground",
 								item === "推荐" && "text-foreground after:absolute after:inset-x-1 after:bottom-0 after:h-0.5 after:rounded-full after:bg-[#ff6f91]"
@@ -364,6 +374,7 @@ export function SiteHeader() {
 					))}
 					<Link
 						href="/pricing"
+						prefetch={false}
 						className="ml-auto hidden shrink-0 items-center gap-1.5 py-3 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground md:flex"
 					>
 						<CreditCard className="size-4" />
@@ -384,6 +395,7 @@ export function SiteHeader() {
 						<Link
 							key={item.href}
 							href={item.href}
+							prefetch={false}
 							className={cn(
 								"flex flex-col items-center gap-1 px-3 py-0.5 text-[11px] font-medium transition-all duration-200 rounded-lg active:scale-95",
 								active ? "text-[#ff6f91]" : "text-muted-foreground hover:text-foreground"

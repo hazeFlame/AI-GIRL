@@ -12,6 +12,9 @@ import { buttonVariants } from "@/components/ui/button";
 import { companions } from "@/config/companions";
 import { cn } from "@/lib/utils";
 
+export const dynamic = "force-static";
+export const revalidate = false;
+
 const features = [
 	{
 		icon: MessageSquare,
@@ -69,6 +72,7 @@ export default function Home() {
 					<div>
 						<Link
 							href="/explore"
+							prefetch={false}
 							className={cn(
 								buttonVariants({ size: "lg" }),
 								"h-14 px-8 text-base bg-gradient-to-r from-[#ff6f91] via-[#ff7c9b] to-[#ff84a2] hover:scale-[1.02] active:scale-[0.98] text-white border-0 shadow-xl shadow-[#ff6f91]/30 transition-all font-semibold rounded-xl"

@@ -105,6 +105,7 @@ function StudioRailItem({
 					: "text-white/45 hover:bg-white/[0.06] hover:text-white"
 			)}
 			href={href}
+			prefetch={false}
 		>
 			<Icon className="size-4" />
 			{label}
@@ -129,6 +130,7 @@ function MobileStudioTabs({ currentView }: { currentView: StudioView }) {
 								: "bg-white/[0.055] text-white/55 hover:text-white"
 						)}
 						href={item.href}
+						prefetch={false}
 					>
 						<Icon className="size-4" />
 						{item.label}
@@ -201,7 +203,7 @@ function StudioHome({ displayName }: { displayName: string }) {
 						{displayName}，这里管理你的角色卡、草稿和创作素材。
 					</p>
 				</div>
-				<Link href="/studio?view=create">
+				<Link href="/studio?view=create" prefetch={false}>
 					<Button className="bg-[#ff2f75] text-white hover:bg-[#ff4b88]">
 						<Plus className="size-4" />
 						创建角色
@@ -212,6 +214,7 @@ function StudioHome({ displayName }: { displayName: string }) {
 			<Link
 				className="mt-8 flex items-center justify-between rounded-2xl border border-[#ff2f75]/25 bg-[#ff2f75]/8 p-5 transition-colors hover:border-[#ff2f75]/50 hover:bg-[#ff2f75]/12"
 				href="/studio?view=create"
+				prefetch={false}
 			>
 				<div className="flex items-center gap-4">
 					<span className="flex size-12 items-center justify-center rounded-2xl bg-[#ff2f75]/16 text-[#ff2f75]">
@@ -490,6 +493,7 @@ export default async function StudioPage({ searchParams }: StudioPageProps) {
 				<aside className="hidden border-r border-white/8 bg-[#101014] p-3 lg:block">
 					<Link
 						href="/explore"
+						prefetch={false}
 						className="flex h-10 items-center gap-2 rounded-lg px-3 text-sm text-white/50 transition-colors hover:bg-white/[0.06] hover:text-white"
 					>
 						<ArrowLeft className="size-4" />
@@ -539,6 +543,7 @@ export default async function StudioPage({ searchParams }: StudioPageProps) {
 							<div className="lg:hidden">
 								<Link
 									href="/explore"
+									prefetch={false}
 									className="inline-flex h-9 items-center gap-2 rounded-lg px-2.5 text-sm text-white/55 transition-colors hover:bg-white/[0.06] hover:text-white"
 								>
 									<ArrowLeft className="size-4" />

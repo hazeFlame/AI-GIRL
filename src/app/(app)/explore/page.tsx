@@ -6,6 +6,9 @@ import { CompanionGrid } from "@/components/explore/companion-grid";
 import { WelcomeBanner } from "@/components/explore/welcome-banner";
 import { companions } from "@/config/companions";
 
+export const dynamic = "force-static";
+export const revalidate = false;
+
 const categoryItems = [
 	"暧昧",
 	"陪伴",
@@ -44,7 +47,7 @@ export default function ExplorePage() {
 						</div>
 					</div>
 
-					<Link href="/studio?view=create">
+					<Link href="/studio?view=create" prefetch={false}>
 						<Button className="w-full gap-2 bg-[#ff6f91] text-white hover:bg-[#ff84a2] sm:w-auto">
 							<Plus className="size-4" />
 							创建角色
@@ -57,6 +60,7 @@ export default function ExplorePage() {
 						<Link
 							key={item}
 							href="/explore"
+							prefetch={false}
 							className="rounded-lg border bg-card px-3 py-2 text-sm text-muted-foreground transition-colors hover:border-[#ff6f91]/40 hover:text-foreground"
 						>
 							{item}

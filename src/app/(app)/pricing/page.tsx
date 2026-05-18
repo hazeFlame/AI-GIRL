@@ -1,6 +1,7 @@
 import { PricingSection } from "@/components/pricing-section";
 
-export const dynamic = "force-dynamic";
+export const dynamic = "force-static";
+export const revalidate = false;
 
 export default function PricingPage() {
   return (
